@@ -1,3 +1,13 @@
+Demonstrative repository of DevSecOps using Trivy's sarif codeql scans on a given sample application for the MsC 1 2024 T-NSA-800 project.\
+GitHub Advanced Security is either available on:
+- a private repository under a GitHub Entreprise organization
+- a public repository
+
+Our original project-generated repository is under the GitHub Entreprise Epitech organization but they disabled the feature so I'm creating this repository to showcase it at the review.\
+Here's the original sample-app's french README:
+
+<ul>
+
 # Sample app
 
 - Utilise une base mysql
@@ -30,3 +40,5 @@ php artisan migrate
 ```bash
 php artisan db:seed
 ```
+
+</ul>
