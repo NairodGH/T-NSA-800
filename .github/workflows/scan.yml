@@ -22,9 +22,6 @@ jobs:
           image-ref: 'docker.io/epitech/sample-app:${{ github.sha }}'
           format: 'sarif'
           output: 'scan.sarif'
-          ignore-unfixed: true
-          severity: 'UNKNOWN'
-          limit-severities-for-sarif: true
       - name: Upload scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
         with:
