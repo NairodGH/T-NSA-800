@@ -1,0 +1,26 @@
+name: scan
+
+on:
+  push:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v2
+      - name: Build an image from Dockerfile
+        run: docker build -t docker.io/epitech/sample-app:${{ github.sha }} .
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'docker.io/epitech/sample-app:${{ github.sha }}'
+          format: 'sarif'
+          output: 'scan.sarif'
+          ignore-unfixed: true
+          severity: 'UNKNOWN'
+          limit-severities-for-sarif: true
+      - name: Upload scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'scan.sarif'

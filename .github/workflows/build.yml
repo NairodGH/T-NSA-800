@@ -1,0 +1,13 @@
+name: build
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v2
+      - name: Build and up the image (don't start it to prevent the job from running endlessly)
+        run: docker-compose up --build --no-start
