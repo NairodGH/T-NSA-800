@@ -10,7 +10,9 @@ jobs:
       - name: Checkout repository code
         uses: actions/checkout@v2
       - name: Build the image
-        run: docker-compose build
+        run: |
+          docker-compose build
+          docker image ls
       - name: Tag the image
         run: docker tag t-nsa-800-app nexus.gabrielhamel.fr/repository/app-docker/web-php:1.0
       - name: Login to Nexus Docker registry
