@@ -12,7 +12,7 @@ jobs:
       - name: Build the image
         if: ${{ success() }}
         run: |
-          docker-compose build
+          COMPOSE_PROJECT_NAME=t-nsa-800 docker-compose build
           docker image ls
       - name: Tag the image
         if: ${{ success() }}
