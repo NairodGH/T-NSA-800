@@ -19,5 +19,5 @@ jobs:
           username: ${{ secrets.NEXUS_USERNAME }}
           password: ${{ secrets.NEXUS_PASSWORD }}
           registry: nexus.gabrielhamel.fr
-      - name: Tag and push the image
+      - name: Push the image
         run: docker push nexus.gabrielhamel.fr/repository/app-docker/web-php:1.0
