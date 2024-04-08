@@ -10,9 +10,11 @@ jobs:
       - name: Start the image with SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.APP_WEB_HOST }}
-          username: ${{ secrets.APP_WEB_USERNAME }}
+          host: ${{ vars.APP_WEB_HOST }}
+          username: ${{ vars.APP_WEB_USERNAME }}
           passphrase: ${{ secrets.APP_WEB_PASSWORD }}
           key: ${{ secrets.SSH_KEY_APP_WEB }}
-          port: ${{ secrets.APP_WEB_PORT }}
-          script: sudo docker run ${{ secrets.REGISTRY_URL }}
+          port: ${{ vars.APP_WEB_PORT }}
+          script: |
+            docker login https://nexus.gabrielhamel.fr/ -u ${{ vars.NEXUS_USERNAME }} -p "${{ secrets.NEXUS_PASSWORD }}"
+            docker run nexus.gabrielhamel.fr/repository/app-docker/web-php:1.0

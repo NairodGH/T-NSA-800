@@ -16,7 +16,7 @@ jobs:
       - name: Login to Nexus Docker registry
         uses: docker/login-action@v1
         with:
-          username: ${{ secrets.NEXUS_USERNAME }}
+          username: ${{ vars.NEXUS_USERNAME }}
           password: ${{ secrets.NEXUS_PASSWORD }}
           registry: nexus.gabrielhamel.fr
       - name: Push the image
