@@ -15,6 +15,9 @@ jobs:
           passphrase: ${{ secrets.APP_WEB_PASSWORD }}
           key: ${{ secrets.SSH_KEY_APP_WEB }}
           port: ${{ vars.APP_WEB_PORT }}
+
+          # login then stop the container then start our container
           script: |
             sudo docker login https://nexus.gabrielhamel.fr/ -u ${{ vars.NEXUS_USERNAME }} -p "${{ secrets.NEXUS_PASSWORD }}"
-            sudo docker run -d nexus.gabrielhamel.fr/repository/app-docker/web-php:1.0
+            sudo docker stop app-web || true
+            sudo docker run -d --name app-web nexus.gabrielhamel.fr/repository/app-docker/web-php:1.0
