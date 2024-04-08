@@ -21,3 +21,19 @@ jobs:
           registry: nexus.gabrielhamel.fr
       - name: Push the image
         run: docker push nexus.gabrielhamel.fr/repository/app-docker/web-php:1.0
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Start the image with SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ vars.APP_WEB_HOST }}
+          username: ${{ vars.APP_WEB_USERNAME }}
+          passphrase: ${{ secrets.APP_WEB_PASSWORD }}
+          key: ${{ secrets.SSH_KEY_APP_WEB }}
+          port: ${{ vars.APP_WEB_PORT }}
+          script: |
+            sudo docker login https://nexus.gabrielhamel.fr/ -u ${{ vars.NEXUS_USERNAME }} -p "${{ secrets.NEXUS_PASSWORD }}"
+            sudo docker stop app-web || true
+            sudo docker rm app-web || true
+            sudo docker run -d --name app-web -v web-app-vol nexus.gabrielhamel.fr/repository/app-docker/web-php:1.0
