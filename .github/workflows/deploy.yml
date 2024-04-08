@@ -4,7 +4,7 @@ on:
   push:
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Start the image with SSH
@@ -12,7 +12,7 @@ jobs:
         with:
           host: ${{ secrets.APP_WEB_HOST }}
           username: ${{ secrets.APP_WEB_USERNAME }}
-          password: ${{ secrets.APP_WEB_PASSWORD }}
+          passphrase: ${{ secrets.APP_WEB_PASSWORD }}
           key: ${{ secrets.SSH_KEY_APP_WEB }}
           port: ${{ secrets.APP_WEB_PORT }}
           script: docker start ${{ secrets.REGISTRY_URL }}
