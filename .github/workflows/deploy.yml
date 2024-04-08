@@ -15,4 +15,4 @@ jobs:
           passphrase: ${{ secrets.APP_WEB_PASSWORD }}
           key: ${{ secrets.SSH_KEY_APP_WEB }}
           port: ${{ secrets.APP_WEB_PORT }}
-          script: docker start ${{ secrets.REGISTRY_URL }}
+          script: sudo docker start ${{ secrets.REGISTRY_URL }}
