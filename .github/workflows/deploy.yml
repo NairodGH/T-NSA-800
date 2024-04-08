@@ -20,4 +20,5 @@ jobs:
           script: |
             sudo docker login https://nexus.gabrielhamel.fr/ -u ${{ vars.NEXUS_USERNAME }} -p "${{ secrets.NEXUS_PASSWORD }}"
             sudo docker stop app-web || true
-            sudo docker run -d --name app-web nexus.gabrielhamel.fr/repository/app-docker/web-php:1.0
+            sudo docker rm app-web || true
+            sudo docker run -d --name app-web -v web-app-vol nexus.gabrielhamel.fr/repository/app-docker/web-php:1.0
