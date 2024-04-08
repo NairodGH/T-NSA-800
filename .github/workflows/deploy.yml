@@ -17,4 +17,4 @@ jobs:
           port: ${{ vars.APP_WEB_PORT }}
           script: |
             sudo docker login https://nexus.gabrielhamel.fr/ -u ${{ vars.NEXUS_USERNAME }} -p "${{ secrets.NEXUS_PASSWORD }}"
-            sudo docker run nexus.gabrielhamel.fr/repository/app-docker/web-php:1.0 -d
+            sudo docker run -d nexus.gabrielhamel.fr/repository/app-docker/web-php:1.0
