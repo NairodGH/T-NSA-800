@@ -36,4 +36,4 @@ jobs:
             sudo docker login https://nexus.gabrielhamel.fr/ -u ${{ vars.NEXUS_USERNAME }} -p "${{ secrets.NEXUS_PASSWORD }}"
             sudo docker stop app-web || true
             sudo docker rm app-web || true
-            sudo docker run -d --name app-web -v web-app-vol nexus.gabrielhamel.fr/repository/app-docker/web-php:1.0
+            sudo docker run -d -p "8081:80" --name app-web -v web-app-vol --env APP_ENV="${{ vars.APP_ENV }}" --env APP_DEBUG="${{ vars.APP_DEBUG }}" --env APP_KEY="${{ vars.APP_KEY }}" --env DB_CONNECTION="${{ vars.DB_CONNECTION }}" --env DB_HOST="${{ vars.DB_HOST }}" --env DB_PORT="${{ vars.DB_PORT }}" --env DB_DATABASE="${{ vars.DB_DATABASE }}" --env DB_USERNAME="${{ vars.DB_USERNAME }}" --env DB_PASSWORD="${{ vars.DB_PASSWORD }}" nexus.gabrielhamel.fr/repository/app-docker/web-php:1.0
